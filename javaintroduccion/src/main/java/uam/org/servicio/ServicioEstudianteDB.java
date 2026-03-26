@@ -3,8 +3,35 @@ package uam.org.servicio;
 import uam.org.config.Global;
 import uam.org.model.Estudiante;
 
-public class ServicioEstudianteDB {
-    public static Estudiante insertarEstudiante(Estudiante estudiante)
+public class ServicioEstudianteDB implements IEstudianteServiceDB {
+    @Override
+    public Estudiante insertarEstudiante(Estudiante e) {
+        Global.listaEstudiante.add(e);
+        return e;
+    }
+
+    @Override
+    public void eliminarEstudiante(Estudiante e) {
+        Global.listaEstudiante.remove(e);
+
+    }
+
+    @Override
+    public Estudiante obtenerEstudiante(Estudiante e)
+    {
+        return Global.listaEstudiante.stream().filter(x-> x.getCif().equals(x.getCif()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public Estudiante updateEstudiante(Estudiante e) {
+        return null;
+    }
+
+
+
+    /*public static Estudiante insertarEstudiante(Estudiante estudiante)
     {
         Global.listaEstudiante.add(estudiante);
         return estudiante;
@@ -27,5 +54,5 @@ public class ServicioEstudianteDB {
 
             }
         }
-    }
+    }*/
 }
